@@ -34,9 +34,9 @@ const sendTokenCookie = (res, token) => {
 };
 
 /**
- * @desc    Register a new user
- * @route   POST /api/auth/signup
- * @access  Public
+ * @Description    Register a new user
+ * @Route   POST /api/auth/signup
+ * @Access  Public
  */
 exports.signup = async (req, res) => {
   try {
@@ -145,9 +145,9 @@ exports.resetPassword = async (req, res) => {
 };
 
 /**
- * @desc    Login user
- * @route   POST /api/auth/login
- * @access  Public
+ * @Description    Login user
+ * @Route   POST /api/auth/login
+ * @Access  Public
  */
 exports.login = async (req, res) => {
   try {
@@ -201,9 +201,9 @@ exports.login = async (req, res) => {
 };
 
 /**
- * @desc    Logout user
- * @route   GET /api/auth/logout
- * @access  Private
+ * @Description    Logout user
+ * @Route   GET /api/auth/logout
+ * @Access  Private
  */
 exports.logout = async (req, res) => {
   try {
@@ -224,9 +224,9 @@ exports.logout = async (req, res) => {
 };
 
 /**
- * @desc    Get current logged in user profile
- * @route   GET /api/auth/me
- * @access  Private
+ * @Description    Get current logged in user profile
+ * @Route   GET /api/auth/me
+ * @Access  Private
  */
 exports.getMe = async (req, res) => {
   try {
@@ -247,9 +247,9 @@ exports.getMe = async (req, res) => {
 };
 
 /**
- * @desc    Update user profile
- * @route   PUT /api/auth/update
- * @access  Private
+ * @Description    Update user profile
+ * @Route   PUT /api/auth/update
+ * @Access  Private
  */
 exports.updateProfile = async (req, res) => {
   try {
