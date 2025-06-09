@@ -73,7 +73,7 @@ exports.signup = async (req, res) => {
     });
 
     // Send verification email
-    const verifyLink = `${process.env.FRONTEND_URL}/verify-email?token=${emailVerificationToken}`;
+    const verifyLink = `${process.env.PRODUCTION_FRONTEND_URL}/verify-email?token=${emailVerificationToken}`;
     await sendVerificationEmail(email, verifyLink);
 
     res.status(201).json({
