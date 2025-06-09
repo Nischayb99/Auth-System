@@ -1,0 +1,49 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const connectDB = require('./db');
+const authRoutes = require('./routes/authRoutes');
+
+// Initialize express app
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDB();
+
+// Middleware
+app.use(express.json());
+app.use(cookieParser());
+app.use(morgan('dev'));
+
+// CORS setup for development and production
+app.use(cors({
+  origin: ['https://bondify-one.vercel.app', 'http://localhost:5173'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Accept'],
+  exposedHeaders: ['set-cookie'],
+}));
+
+// Rate limiting for auth routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200, // max 200 requests per window per IP
+  message: { success: false, message: 'Too many attempts, please try again later.' }
+});
+app.use('/api/auth/', authLimiter);
+
+// Routes
+app.use('/api/auth', authRoutes);
+
+// ...other rout
+
+
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
