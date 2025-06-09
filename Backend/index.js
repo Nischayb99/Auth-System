@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 
 // CORS setup for development and production
 app.use(cors({
-  origin: ['https://bondify-one.vercel.app', 'http://localhost:5173'],
+  origin: ['https://auth-system-ruddy.vercel.app', 'http://localhost:5173'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Accept'],
