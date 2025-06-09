@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNotification } from "../context/NotificationContext";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
   const { login, isAuthenticated, loading, error, clearError } = useAuth();
@@ -176,6 +177,18 @@ const Login = () => {
                 Forgot Password?
               </Link>
             </p>
+          </div>
+          <div className="mt-6 text-center  text-2xl">
+            <a
+              href="https://auth-system-5g1z.onrender.com/api/auth/google"
+              className="google-login-btn flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white text-black hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGoogle className="inline mr-2" />
+              <span>Login with Google</span>
+              {/* <img src="/google-icon.svg" alt="Google" /> Login with Google */}
+            </a>
           </div>
         </div>
       </div>

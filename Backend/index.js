@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('./db');
 const authRoutes = require('./routes/authRoutes');
+const session = require('express-session');
+const passport = require('passport');
 
 // Initialize express app
 const app = express();
@@ -35,6 +37,10 @@ const authLimiter = rateLimit({
   message: { success: false, message: 'Too many attempts, please try again later.' }
 });
 app.use('/api/auth/', authLimiter);
+
+app.use(session({ secret: 'your_secret', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/api/auth', authRoutes);

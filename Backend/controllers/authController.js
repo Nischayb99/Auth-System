@@ -4,6 +4,9 @@ const config = require('../config');
 const crypto = require("crypto");
 const { sendVerificationEmail, sendResetPasswordEmail } = require("../utils/sendEmail");
 
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 /**
  * Generate a JWT token for the user
  * @param {Object} user - User object with id 
@@ -32,6 +35,33 @@ const sendTokenCookie = (res, token) => {
     config.jwt.cookieOptions
   );
 };
+
+
+// Google Strategy Setup
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL,
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    let user = await User.findOne({ email: profile.emails[0].value });
+    if (!user) {
+      user = await User.create({
+        username: profile.displayName,
+        email: profile.emails[0].value,
+        isVerified: true,
+        password: Math.random().toString(36), // random password
+      });
+    }
+    return done(null, user);
+  }
+));
+
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
+});
 
 /**
  * @Description    Register a new user
