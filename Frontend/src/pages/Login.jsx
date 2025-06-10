@@ -180,7 +180,7 @@ const Login = () => {
           </div>
           <div className="mt-6 text-center  text-2xl">
             <a
-              href="https://auth-system-5g1z.onrender.com/api/auth/google"
+              href={import.meta.env.VITE_GOOGLE_AUTH_URL}
               className="google-login-btn flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white text-black hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               target="_blank"
               rel="noopener noreferrer"

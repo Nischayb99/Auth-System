@@ -22,8 +22,21 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 // CORS setup for development and production
+const allowedOrigins = [
+  process.env.PRODUCTION_FRONTEND_URL,
+  process.env.LOCALHOST_FRONTEND_URL
+];
+
 app.use(cors({
-  origin: ['https://auth-system-ruddy.vercel.app', 'http://localhost:5173'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Accept'],

@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const config = require('../config');
 const crypto = require("crypto");
+const getFrontendUrl = require('../utils/getFrontendUrl');
 const { sendVerificationEmail, sendResetPasswordEmail } = require("../utils/sendEmail");
 
 const passport = require('passport');
@@ -103,7 +104,7 @@ exports.signup = async (req, res) => {
     });
 
     // Send verification email
-    const verifyLink = `${process.env.PRODUCTION_FRONTEND_URL}/verify-email?token=${emailVerificationToken}`;
+    const verifyLink = `${getFrontendUrl(req)}/verify-email?token=${emailVerificationToken}`;
     await sendVerificationEmail(email, verifyLink);
 
     res.status(201).json({
@@ -152,7 +153,7 @@ exports.forgotPassword = async (req, res) => {
   user.resetPasswordExpires = Date.now() + 1000 * 60 * 60; // 1 hour
   await user.save();
 
-  const resetLink = `${process.env.PRODUCTION_FRONTEND_URL}/reset-password?token=${token}`;
+  const resetLink = `${getFrontendUrl(req)}/reset-password?token=${token}`;
   await sendResetPasswordEmail(email, resetLink);
 
   res.json({ success: true, message: "If that email exists, a reset link has been sent." });

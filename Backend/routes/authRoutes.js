@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const { protect } = require('../middleware/authMiddleware');
+const getFrontendUrl = require('../utils/getFrontendUrl');
 
 // Auth routes
 router.post('/signup', authController.signup);
@@ -16,25 +17,26 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 // Google callback
 router.get('/google/callback',
-  passport.authenticate('google', { failureRedirect: `${process.env.PRODUCTION_FRONTEND_URL}/login` }),
+  passport.authenticate('google', { failureRedirect: '/login' }), // static string
   (req, res) => {
-    // JWT token banao
     const jwt = require('jsonwebtoken');
     const config = require('../config');
+    const getFrontendUrl = require('../utils/getFrontendUrl');
     const token = jwt.sign(
       { id: req.user._id },
       process.env.JWT_SECRET,
       { expiresIn: config.jwt.expiresIn }
     );
-    // Cookie set karo (sameSite, secure, etc. config se)
     res.cookie(
       config.jwt.cookieName,
       token,
       config.jwt.cookieOptions
     );
-    res.redirect(`${process.env.PRODUCTION_FRONTEND_URL}/profile`);
+    // Yahan req available hai!
+    res.redirect(`${getFrontendUrl(req)}/profile`);
   }
 );
+
 
 router.get('/logout', authController.logout); // Now public
 router.get('/me', protect, authController.getMe);
