@@ -18,11 +18,21 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: `${process.env.PRODUCTION_FRONTEND_URL}/login` }),
   (req, res) => {
-    // Redirect to frontend with token (optional: generate JWT and send as query param)
-    // Example:
-    // const token = generateToken(req.user);
-    // res.redirect(`${process.env.PRODUCTION_FRONTEND_URL}/login?token=${token}`);
-    res.redirect(`${process.env.PRODUCTION_FRONTEND_URL}/login`);
+    // JWT token banao
+    const jwt = require('jsonwebtoken');
+    const config = require('../config');
+    const token = jwt.sign(
+      { id: req.user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: config.jwt.expiresIn }
+    );
+    // Cookie set karo (sameSite, secure, etc. config se)
+    res.cookie(
+      config.jwt.cookieName,
+      token,
+      config.jwt.cookieOptions
+    );
+    res.redirect(`${process.env.PRODUCTION_FRONTEND_URL}/profile`);
   }
 );
 
