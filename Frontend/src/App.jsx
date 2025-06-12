@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom";
+import Login from "./pages/authPages/Login";
+import Signup from "./pages/authPages/Signup";
+import Profile from "./pages/authPages/Profile";
+import EditProfile from "./pages/authPages/EditProfile";
+import VerifyEmail from "./pages/authPages/VerifyEmail";
+import ForgotPassword from "./pages/authPages/ForgotPassword";
+import ResetPassword from "./pages/authPages/ResetPassword";
+import { useAuth } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Profile from "./pages/Profile";
-import EditProfile from "./pages/EditProfile";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { useAuth } from "./context/AuthContext";
 import Notification from "./components/Notification";
 import { useNotification } from "./context/NotificationContext";
-import VerifyEmail from "./pages/VerifyEmail";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const { loading } = useAuth();

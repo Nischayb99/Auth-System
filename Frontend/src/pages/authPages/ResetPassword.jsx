@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useNotification } from "../context/NotificationContext";
+import { useNotification } from "../../context/NotificationContext";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");

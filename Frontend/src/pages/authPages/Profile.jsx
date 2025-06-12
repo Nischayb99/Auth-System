@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { TbUserEdit } from "react-icons/tb";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BsChatLeftText } from "react-icons/bs";
-import { useNotification } from "../context/NotificationContext";
-import Footer from "../components/Footer";
+import { useNotification } from "../../context/NotificationContext";
+import Footer from "../../components/Footer";
 
 function Profile() {
   const { user, isAuthenticated, loading, logout } = useAuth();

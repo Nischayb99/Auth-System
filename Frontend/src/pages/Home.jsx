@@ -12,19 +12,28 @@ const Home = () => {
         {/* Left: Welcome & CTA */}
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
-            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-blue-400 to-cyan-400">Auth Stytem</span>
+            Welcome to{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-blue-400 to-cyan-400">
+              Auth System
+            </span>
           </h1>
           <p className="text-lg md:text-xl text-primary-200 mb-8 max-w-xl mx-auto md:mx-0 drop-shadow">
-            <span className="font-semibold text-white">Create, chat, and bond</span> with your own AI personalities.<br />
-            <span className="text-primary-400">Secure, modern, and fun chat experience powered by AI.</span>
+            <span className="font-semibold text-white">
+              Open Source Authentication for Modern Apps
+            </span>
+            <br />
+            <span className="text-primary-400">
+              Secure, flexible, and production-ready authentication with Email/Password, Google OAuth, JWT, and more.<br />
+              Easily integrate in your own projects – just update the <code>.env</code> file!
+            </span>
           </p>
           {isAuthenticated ? (
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link
-                to="/chats"
+                to="/features"
                 className="focus:ring-2 focus:ring-blue-400 bg-gradient-to-r from-primary-600 to-blue-500 text-white py-3 px-8 rounded-lg font-semibold text-lg shadow-lg hover:scale-105 hover:from-primary-700 hover:to-blue-600 transition-all"
               >
-                Go to Chats
+                Explore Features
               </Link>
               <Link
                 to="/profile"
@@ -54,8 +63,8 @@ const Home = () => {
         <div className="flex-1 flex justify-center md:justify-end">
           <div className="relative">
             <img
-              src="/bondify.svg"
-              alt="Bondify Logo"
+              src="/vite.svg"
+              alt="Project Logo"
               className="w-64 h-64 md:w-80 md:h-80 drop-shadow-2xl animate-float"
             />
             <div className="absolute -top-6 -right-6 bg-gradient-to-br from-primary-500 to-blue-400 rounded-full w-16 h-16 blur-2xl opacity-40"></div>

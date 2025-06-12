@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNotification } from "../context/NotificationContext";
+import { useNotification } from "../../context/NotificationContext";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
